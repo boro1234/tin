@@ -1,1 +1,1 @@
-web: gunicorn predict_file:app --log-file=-
+web: gunicorn --chdir tin predict_file:app --log-file=-
