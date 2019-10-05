@@ -20,7 +20,7 @@ graph = tf.get_default_graph()
 model = load_model("./tin_cnn.h5")
 
 UPLOAD_FOLDER = './uploads'
-ALLOWED_EXTENSIONS = set(['png','jpg','gif'])
+ALLOWED_EXTENSIONS = set(['png','jpg','gif','jpeg'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -46,8 +46,6 @@ def upload_file():
                  file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                  filepath=os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
-
-
                  image = Image.open(filepath)
                  image = image.convert("RGB")
                  image = image.resize((image_size,image_size))
@@ -61,7 +59,7 @@ def upload_file():
                  percentage = int(result[predicted]*100)
 
                  if classes[predicted] == "bottle":
-                     return render_template("tin_bottole.html")
+                     return render_template("tin_bottle.html")
                  if classes[predicted] == "chimney":
                      return render_template("tin_chimney.html")
                  if classes[predicted] == "mushroom":
