@@ -32,6 +32,8 @@ def allowed_file(filename):
 def upload_file():
     global graph
     with graph.as_default():
+        #初めに用意されたグラフをグローバル変数として、ファイルがアップロードされて判断結果が出るたびにグラフが更新されるようにする
+        #これがなければ、一つのグラフにのみ適用されてしまい、改めて違うデータの読み込みと判断ができない。
 
         if request.method == 'POST':
             if 'file' not in request.files:
@@ -83,6 +85,7 @@ def upload_file():
 
         #return redirect(url_for('uploaded_file',filename=filename))
         return render_template("tintin.html",zoudata=zoudata)
+        #herokuでは画像の生成ができない。そのため画像のバイナリデータを直接代入する必要がある。
 
 from flask import send_from_directory
 
